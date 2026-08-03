@@ -27,10 +27,8 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "fuse.js": "^6.6.2",
     "lodash.isequal": "^4.5.0",
-    "lodash.startcase": "^4.4.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "uuid": "^14.0.1",
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {

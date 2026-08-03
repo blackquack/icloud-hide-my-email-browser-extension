@@ -143,14 +143,8 @@ const UsageInstructions = () => {
           HideMyEmail addresses and manage existing ones.
         </p>
         <p>
-          <span className="font-semibold">
-            In most cases though, you don&apos;t need to interact with the
-            pop-up UI
-          </span>
-          . The extension will automatically detect email input fields and
-          prompt you to autofill new addresses! Alternatively, you can
-          right-click on any text input field and select the menu item of the
-          extension.
+          Generate or select an address in the extension pop-up, then use its
+          Autofill button to fill email fields on the current page.
         </p>
       </div>
       <div className="space-y-2">
@@ -158,29 +152,16 @@ const UsageInstructions = () => {
         <div className="w-full max-w-md p-3 border rounded-lg bg-gray-50">
           <form className="space-y-2">
             <AutofillableDemoInput
-              label="Autofill via button"
+              label="Autofill from the extension pop-up"
               inputAttributes={{
-                id: 'autofill-by-button',
+                id: 'autofill-from-popup',
                 name: 'email',
                 type: 'email',
-                placeholder: 'Click (focus) on this field',
-              }}
-            />
-            <AutofillableDemoInput
-              label="Autofill via right-click context menu"
-              inputAttributes={{
-                id: 'autofill-by-right-click',
-                type: 'text',
-                placeholder:
-                  'Right click on this field and select the menu item of the extension',
+                placeholder: 'Use Autofill in the extension pop-up',
               }}
             />
           </form>
         </div>
-      </div>
-      <div>
-        If you find the autofill-via-button feature intrusive, you can disable
-        it in the <Link href="./options.html">extension Options</Link>.
       </div>
       <div>
         Don&apos;t forget to delete the HideMyEmail addresses you created above

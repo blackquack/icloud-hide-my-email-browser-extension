@@ -50,10 +50,6 @@ import {
   STATE_MACHINE_TRANSITIONS,
   AuthenticatedAndManagingAction,
 } from './stateMachine';
-import {
-  CONTEXT_MENU_ITEM_ID,
-  SIGNED_OUT_CTA_COPY,
-} from '../Background/constants';
 import { isFirefox } from '../../browserUtils';
 
 type TransitionCallback<T extends PopupAction> = (action: T) => void;
@@ -199,15 +195,6 @@ const FooterButton = (
   );
 };
 
-async function performDeauthSideEffects(): Promise<void> {
-  await browser.contextMenus
-    .update(CONTEXT_MENU_ITEM_ID, {
-      title: SIGNED_OUT_CTA_COPY,
-      enabled: false,
-    })
-    .catch(console.debug);
-}
-
 const SignOutButton = (props: {
   callback: TransitionCallback<'SIGN_OUT'>;
   client: ICloudClient;
@@ -219,7 +206,6 @@ const SignOutButton = (props: {
         await props.client.signOut();
         // TODO: call the react state setter instead
         setBrowserStorageValue('clientState', undefined);
-        performDeauthSideEffects();
         props.callback('SIGN_OUT');
       }}
       label="Sign out"
@@ -363,9 +349,8 @@ const HmeGenerator = (props: {
       {hmeEmail && (
         <div className="space-y-3">
           <form
-            className={`space-y-3 ${
-              isReservationFormDisabled ? 'opacity-70' : ''
-            }`}
+            className={`space-y-3 ${isReservationFormDisabled ? 'opacity-70' : ''
+              }`}
             onSubmit={onUseSubmit}
           >
             <div>
@@ -543,11 +528,10 @@ const HmeDetails = (props: {
         </button>
         <LoadingButton
           title={props.hme.isActive ? 'Deactivate' : 'Reactivate'}
-          className={`${btnClassName} ${
-            props.hme.isActive
-              ? 'bg-red-500 hover:bg-red-600 focus:ring-red-300'
-              : 'bg-sky-400 hover:bg-sky-500 focus:ring-blue-300'
-          }`}
+          className={`${btnClassName} ${props.hme.isActive
+            ? 'bg-red-500 hover:bg-red-600 focus:ring-red-300'
+            : 'bg-sky-400 hover:bg-sky-500 focus:ring-blue-300'
+            }`}
           onClick={onActivationClick}
           loading={isActivateSubmitting}
         >
@@ -817,7 +801,6 @@ const Popup = () => {
       } else {
         setState(PopupState.SignedOut);
         setClientState(undefined);
-        performDeauthSideEffects();
       }
 
       setClientAuthStateSynced(true);
