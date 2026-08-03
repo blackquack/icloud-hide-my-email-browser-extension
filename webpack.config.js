@@ -5,8 +5,7 @@ const webpack = require('webpack'),
   TerserPlugin = require('terser-webpack-plugin'),
   MiniCssExtractPlugin = require('mini-css-extract-plugin'),
   { CleanWebpackPlugin } = require('clean-webpack-plugin'),
-  ASSET_PATH = process.env.ASSET_PATH || '/',
-  FIREFOX = process.env.FIREFOX === 'true';
+  ASSET_PATH = process.env.ASSET_PATH || '/';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -22,29 +21,6 @@ const fileExtensions = [
   'woff',
   'woff2',
 ];
-
-const applyFirefoxManifestTransformations = (manifest) => {
-  const {
-    background: { service_worker },
-  } = manifest;
-
-  return {
-    ...manifest,
-    background: {
-      scripts: [service_worker],
-    },
-    ...{
-      browser_specific_settings: {
-        gecko: {
-          id: '{5f2806a5-f66d-40c6-8fb2-6018753b5626}',
-          // Minimum version of Firefox that supports declarativeNetRequest:
-          // https://blog.mozilla.org/addons/2023/05/17/declarativenetrequest-available-in-firefox/
-          strict_min_version: '113.0',
-        },
-      },
-    },
-  };
-};
 
 const options = {
   mode: isDev ? 'development' : 'production',
@@ -129,9 +105,7 @@ const options = {
             return Buffer.from(
               JSON.stringify({
                 version: process.env.npm_package_version,
-                ...(!FIREFOX
-                  ? manifest
-                  : applyFirefoxManifestTransformations(manifest)),
+                ...manifest,
               })
             );
           },

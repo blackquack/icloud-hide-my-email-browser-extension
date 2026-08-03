@@ -2,10 +2,9 @@
 
 [![Tests Status](https://github.com/dedoussis/icloud-hide-my-email-browser-extension/workflows/tests/badge.svg)](https://github.com/dedoussis/icloud-hide-my-email-browser-extension/actions/workflows/tests.yml)
 
-[Hide My Email](https://support.apple.com/en-us/HT210425) is a premium privacy service of iCloud. Safari offers a native integration with Hide My Email, whereby users are prompted to generate a Hide My Email address upon registration to any website. This extension aims to bring a similar UX into a wider variety of browsers. In particular, it has been explicitly tested to work on:
+[Hide My Email](https://support.apple.com/en-us/HT210425) is a premium privacy service of iCloud. Safari offers a native integration with Hide My Email, whereby users are prompted to generate a Hide My Email address upon registration to any website. This extension brings a similar UX to Chromium-based browsers. It has been tested on:
 
 - [Chrome](https://chrome.google.com/webstore/detail/icloud-hide-my-email/omiaekblhgfopjkjnenhahfgcgnbohlk)
-- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/icloud-hide-my-email/)
 - [Brave](https://chrome.google.com/webstore/detail/icloud-hide-my-email/omiaekblhgfopjkjnenhahfgcgnbohlk)
 - Microsoft Edge
 
@@ -28,24 +27,7 @@ _Disclaimer: This extension is not endorsed by, directly affiliated with, mainta
 - Autofilling on any HTML input element that is relevant to email
 - Quick configuration of Hide My Email settings, such as the Forward-To address, through the Options page of the extension
 
-## Options
-
-### Address autofilling
-
-The extension can be configured to
-
-1. show an autofill button on input field focus
-2. show a context menu item when right-clicking on input fields
-
-<p align="center">
-<img src="./src/assets/img/readme-button-autofilling.png" alt="Autofilling button on input field focus" width="400" height="auto"/>
-</p>
-
-<p align="center">
-<img src="./src/assets/img/readme-context-menu-autofilling.png" alt="Context menu item when right-clicking on input fields" width="400" height="auto"/>
-</p>
-
-You can enable/disable any of the autofilling mechanisms through the Options page of the extension.
+After generating and reserving an address, use the pop-up's Autofill button to fill email fields on the current page.
 
 ## Develop
 
@@ -69,21 +51,20 @@ ENTRYPOINT ["sh"]
 
 ### Development workflow
 
-The table below outlines the sequence of steps that need to be followed in order to ship a change in the extension. The execution of some of these steps varies per browser engine.
+The table below outlines the sequence of steps needed to ship a change.
 
 Note: the following console commands are to be executed from the root directory of this repo
 
 <!-- prettier-ignore-start -->
-| # | Description | Chromium | Firefox |
-| - | - | - | - |
-| 0 | Configure node environment (not required when building with Docker) | `nvm use` | `nvm use` |
-| 1 | Install deps | `npm ci` | `npm ci && npm i -g web-ext` |
-| 2 | Spin up the DevServer. The server generates the `build` dir. | `npm run start` | `npm run start:firefox` |
-| 3 | Load the unpacked extension on the browser |  The `build` dir can be loaded as an unpacked extension through the browser's UI. See the relevant [Google Chrome guide](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked). | `web-ext -s build run` |
-| 4 | Develop against the local browser instance on which the `build` dir is loaded | N/A | N/A |
-| 5 | Build productionised artefact | `npm run build` | `npm run build:firefox` |
-| 6 | Compress productionised artefact | `zip build.zip ./build/*` | `web-ext -s build build` |
-| 7 | Publish | [Chrome webstore dev console](https://chrome.google.com/webstore/devconsole/) | [Mozilla Add-on developer hub](https://addons.mozilla.org/en-US/developers/addon/icloud-hide-my-email/versions/submit/) |
+| # | Description | Command or action |
+| - | - | - |
+| 0 | Configure Node environment (not required when building with Docker) | `nvm use` |
+| 1 | Install dependencies | `npm ci` |
+| 2 | Start the development server, which generates the `build` directory | `npm run start` |
+| 3 | Load the unpacked extension | Load `build` through the browser's extension UI. See the [Google Chrome guide](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked). |
+| 4 | Build the production artifact | `npm run build` |
+| 5 | Compress the production artifact | `zip build.zip ./build/*` |
+| 6 | Publish | [Chrome Web Store developer console](https://chrome.google.com/webstore/devconsole/) |
 <!-- prettier-ignore-end -->
 
 ### TODOs

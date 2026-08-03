@@ -29,7 +29,6 @@ import {
   faQuestionCircle,
   faGear,
 } from '@fortawesome/free-solid-svg-icons';
-import { faFirefoxBrowser } from '@fortawesome/free-brands-svg-icons';
 import { MessageType, sendMessageToTab } from '../../messages';
 import {
   ErrorMessage,
@@ -50,7 +49,6 @@ import {
   STATE_MACHINE_TRANSITIONS,
   AuthenticatedAndManagingAction,
 } from './stateMachine';
-import { isFirefox } from '../../browserUtils';
 
 type TransitionCallback<T extends PopupAction> = (action: T) => void;
 
@@ -89,26 +87,6 @@ const SignInInstructions = () => {
             <span className="font-semibold">Keep me signed in</span> box
           </div>
         </div>
-        {isFirefox && (
-          <div
-            className="flex p-3 text-sm border text-gray-600 rounded-lg bg-gray-50"
-            role="alert"
-          >
-            <FontAwesomeIcon icon={faFirefoxBrowser} className="mr-2 mt-1" />
-            <span className="sr-only">Info</span>
-            <div>
-              If using{' '}
-              <Link
-                href="https://support.mozilla.org/en-US/kb/containers"
-                className="font-semibold"
-                aria-label="Firefox Multi-Account Containers docs"
-              >
-                Firefox Containers
-              </Link>
-              , sign in to iCloud from a tab outside of a container.
-            </div>
-          </div>
-        )}
         <div className="grid grid-cols-2 gap-3">
           <a
             href={userguideUrl}
