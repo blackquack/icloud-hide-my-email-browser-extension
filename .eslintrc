@@ -1,7 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": ["build/**"],
-  "extends": ["eslint:recommended"],
+  "ignorePatterns": [
+    "build/**"
+  ],
+  "extends": [
+    "eslint:recommended"
+  ],
   "env": {
     "node": true
   },
@@ -9,13 +13,19 @@
     "ecmaVersion": 2020
   },
   "settings": {
+    "import/resolver": {
+      "typescript": true
+    },
     "react": {
       "version": "detect"
     }
   },
   "overrides": [
     {
-      "files": ["**/*.ts", "**/*.tsx"],
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
