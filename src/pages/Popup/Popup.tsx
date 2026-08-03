@@ -22,12 +22,12 @@ import {
   faSignOut,
   IconDefinition,
   faPlus,
-  faTrashAlt,
   faBan,
   faSearch,
   faInfoCircle,
   faExternalLink,
   faQuestionCircle,
+  faGear,
 } from '@fortawesome/free-solid-svg-icons';
 import { faFirefoxBrowser } from '@fortawesome/free-brands-svg-icons';
 import { MessageType, sendMessageToTab } from '../../messages';
@@ -194,6 +194,20 @@ const FooterButton = (
     </button>
   );
 };
+
+const SettingsButton = () => (
+  <button
+    type="button"
+    className="absolute top-0 right-0 flex h-8 w-8 items-center justify-center text-gray-400 hover:text-sky-500 focus:outline-sky-400"
+    onClick={() =>
+      browser.tabs.create({ url: browser.runtime.getURL('options.html') })
+    }
+    title="Settings"
+    aria-label="Settings"
+  >
+    <FontAwesomeIcon icon={faGear} />
+  </button>
+);
 
 const SignOutButton = (props: {
   callback: TransitionCallback<'SIGN_OUT'>;
@@ -460,10 +474,6 @@ const HmeDetails = (props: {
     await navigator.clipboard.writeText(props.hme.hme);
   };
 
-  const onAutofillClick = async () => {
-    await sendMessageToTab(MessageType.Autofill, props.hme.hme);
-  };
-
   const btnClassName =
     'w-full justify-center text-white focus:ring-4 focus:outline-hidden font-medium rounded-lg px-2 py-3 text-center inline-flex items-center';
   const labelClassName = 'font-bold';
@@ -511,20 +521,13 @@ const HmeDetails = (props: {
         </div>
       )}
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 gap-2">
         <button
           title="Copy"
           className={`${btnClassName} bg-sky-400 hover:bg-sky-500 focus:ring-blue-300`}
           onClick={onCopyClick}
         >
-          <FontAwesomeIcon icon={faClipboard} />
-        </button>
-        <button
-          title="Autofill"
-          className={`${btnClassName} bg-sky-400 hover:bg-sky-500 focus:ring-blue-300`}
-          onClick={onAutofillClick}
-        >
-          <FontAwesomeIcon icon={faCheck} />
+          Copy
         </button>
         <LoadingButton
           title={props.hme.isActive ? 'Deactivate' : 'Reactivate'}
@@ -535,16 +538,16 @@ const HmeDetails = (props: {
           onClick={onActivationClick}
           loading={isActivateSubmitting}
         >
-          <FontAwesomeIcon icon={props.hme.isActive ? faBan : faRefresh} />
+          {props.hme.isActive ? 'Deactivate' : 'Reactivate'}
         </LoadingButton>
         {!props.hme.isActive && (
           <LoadingButton
             title="Delete"
-            className={`${btnClassName} bg-red-500 hover:bg-red-600 focus:ring-red-300 col-span-3`}
+            className={`${btnClassName} bg-red-500 hover:bg-red-600 focus:ring-red-300 col-span-2`}
             onClick={onDeletionClick}
             loading={isDeleteSubmitting}
           >
-            <FontAwesomeIcon icon={faTrashAlt} className="mr-1" /> Delete
+            Delete
           </LoadingButton>
         )}
       </div>
@@ -714,10 +717,7 @@ const HmeManager = (props: {
   };
 
   return (
-    <TitledComponent
-      title="Hide My Email"
-      subtitle="Manage your HideMyEmail addresses"
-    >
+    <TitledComponent title="Hide My Email">
       {resolveMainChildComponent()}
       <div className="grid grid-cols-2">
         <div>
@@ -819,7 +819,8 @@ const Popup = () => {
 
   return (
     <div className="min-h-full flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
+      <div className="relative max-w-md w-full">
+        <SettingsButton />
         {isStateLoading || !clientAuthStateSynced ? (
           <Spinner />
         ) : (

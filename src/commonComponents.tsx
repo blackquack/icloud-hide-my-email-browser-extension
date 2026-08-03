@@ -60,7 +60,7 @@ export const ErrorMessage = (props: { children?: React.ReactNode }) => {
 
 export const TitledComponent = (props: {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   children?: React.ReactNode;
 }) => {
   const children =
@@ -70,7 +70,9 @@ export const TitledComponent = (props: {
     <div className="text-base space-y-3">
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900">{props.title}</h1>
-        <h2 className="font-medium text-gray-400">{props.subtitle}</h2>
+        {props.subtitle && (
+          <h2 className="font-medium text-gray-400">{props.subtitle}</h2>
+        )}
       </div>
       {children?.map((child, key) => {
         return (

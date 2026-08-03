@@ -7,7 +7,6 @@ import {
   LoadingButton,
   ErrorMessage,
   TitledComponent,
-  Link,
 } from '../../commonComponents';
 import isEqual from 'lodash.isequal';
 
@@ -127,40 +126,10 @@ const SelectFwdToForm = () => {
   );
 };
 
-const Disclaimer = () => {
-  return (
-    <div>
-      <p>
-        This extension is not endorsed by, directly affiliated with, maintained,
-        authorized, or sponsored by Apple.
-      </p>
-      <p>
-        It is developed independently by{' '}
-        <Link href="https://twitter.com/dedoussis">Dimitrios Dedoussis</Link>.
-      </p>
-      <p>
-        The source code is publicly available at{' '}
-        <Link href="https://github.com/dedoussis/icloud-hide-my-email-browser-extension">
-          GitHub
-        </Link>{' '}
-        under the MIT license.
-      </p>
-      <p>
-        The extension itself is licensed under the same license as the source
-        code.
-      </p>
-    </div>
-  );
-};
-
 const Options = () => {
   return (
     <div className="w-9/12 m-auto my-3">
       <TitledComponent title="Hide My Email" subtitle="Settings">
-        <div>
-          <h3 className="font-bold text-lg mb-3">Disclaimer</h3>
-          <Disclaimer />
-        </div>
         <div>
           <h3 className="font-bold text-lg mb-3">Forward To Address</h3>
           <SelectFwdToForm />

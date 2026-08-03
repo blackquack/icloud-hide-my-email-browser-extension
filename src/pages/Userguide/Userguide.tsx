@@ -212,13 +212,6 @@ const TechnicalOverview = () => {
           At no point does the extension have access to the Apple ID email and
           password that you feed into the icloud.com sign-in form
         </span>
-        . The source of the extension is{' '}
-        <Link
-          href="https://github.com/dedoussis/icloud-hide-my-email-browser-extension"
-          aria-label="source code"
-        >
-          publicly available in GitHub
-        </Link>
         .
       </p>
       <p>
