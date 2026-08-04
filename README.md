@@ -12,6 +12,8 @@ Note that the extension _should_ work on any browser that implements the [extens
 
 _Disclaimer: This extension is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by Apple._
 
+See [Privacy and technical disclosure](PRIVACY.md) for details about authentication, stored data, iCloud requests, permissions, and header rewriting.
+
 <p align="center">
 <img src="./src/assets/img/demo-popup.gif" alt="Extension popup demo" width="400" height="auto"/>
 </p>
