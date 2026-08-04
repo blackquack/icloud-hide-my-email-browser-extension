@@ -8,24 +8,6 @@ var WebpackDevServer = require('webpack-dev-server'),
   path = require('path'),
   PORT = process.env.PORT || 3000;
 
-var options = config.chromeExtensionBoilerplate || {};
-var excludeEntriesToHotReload = options.notHotReload || [];
-
-for (var entryName in config.entry) {
-  if (excludeEntriesToHotReload.indexOf(entryName) === -1) {
-    config.entry[entryName] = [
-      'webpack/hot/dev-server',
-      `webpack-dev-server/client?hot=true&hostname=localhost&port=${PORT}`,
-    ].concat(config.entry[entryName]);
-  }
-}
-
-config.plugins = [new webpack.HotModuleReplacementPlugin()].concat(
-  config.plugins || []
-);
-
-delete config.chromeExtensionBoilerplate;
-
 var compiler = webpack(config);
 
 var server = new WebpackDevServer(
@@ -48,10 +30,6 @@ var server = new WebpackDevServer(
   },
   compiler
 );
-
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept();
-}
 
 (async () => {
   await server.start();

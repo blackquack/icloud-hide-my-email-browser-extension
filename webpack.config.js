@@ -30,9 +30,6 @@ const options = {
     options: path.join(__dirname, 'src', 'pages', 'Options', 'index.tsx'),
     userguide: path.join(__dirname, 'src', 'pages', 'Userguide', 'index.tsx'),
   },
-  chromeExtensionBoilerplate: {
-    notHotReload: ['background'],
-  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'build'),
