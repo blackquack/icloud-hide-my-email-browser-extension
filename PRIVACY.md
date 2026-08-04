@@ -1,6 +1,6 @@
 # Privacy and technical disclosure
 
-This extension is an independent Chromium client for iCloud Hide My Email. It is not endorsed, authorized, maintained, or supported by Apple. It uses iCloud web APIs that are not documented as a public extension API, so Apple may change or disable the behavior at any time.
+This extension is an independent Chromium client for iCloud Hide My Email and has been tested only against Google Chrome. It is not endorsed, authorized, maintained, or supported by Apple. It uses iCloud web APIs that are not documented as a public extension API, so Apple may change or disable the behavior at any time.
 
 ## Authentication
 
