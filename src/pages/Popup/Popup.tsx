@@ -17,7 +17,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faRefresh,
   faClipboard,
-  faCheck,
   faList,
   faSignOut,
   IconDefinition,
@@ -29,7 +28,6 @@ import {
   faQuestionCircle,
   faGear,
 } from '@fortawesome/free-solid-svg-icons';
-import { MessageType, sendMessageToTab } from '../../messages';
 import {
   ErrorMessage,
   LoadingButton,
@@ -119,10 +117,6 @@ const ReservationResult = (props: { hme: HmeEmail }) => {
     await navigator.clipboard.writeText(props.hme.hme);
   };
 
-  const onAutofillClick = async () => {
-    await sendMessageToTab(MessageType.Autofill, props.hme.hme);
-  };
-
   const btnClassName =
     'focus:outline-hidden text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 block w-full';
 
@@ -134,24 +128,14 @@ const ReservationResult = (props: { hme: HmeEmail }) => {
       <p>
         <strong>{props.hme.hme}</strong> has successfully been reserved!
       </p>
-      <div className="grid grid-cols-2 gap-2">
-        <button
-          type="button"
-          className={btnClassName}
-          onClick={onCopyToClipboardClick}
-        >
-          <FontAwesomeIcon icon={faClipboard} className="mr-1" />
-          Copy to clipboard
-        </button>
-        <button
-          type="button"
-          className={btnClassName}
-          onClick={onAutofillClick}
-        >
-          <FontAwesomeIcon icon={faCheck} className="mr-1" />
-          Autofill
-        </button>
-      </div>
+      <button
+        type="button"
+        className={btnClassName}
+        onClick={onCopyToClipboardClick}
+      >
+        <FontAwesomeIcon icon={faClipboard} className="mr-1" />
+        Copy to clipboard
+      </button>
     </div>
   );
 };

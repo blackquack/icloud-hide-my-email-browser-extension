@@ -1,7 +1,7 @@
-import React, { InputHTMLAttributes, useState } from 'react';
+import React from 'react';
 import { TitledComponent, Link } from '../../commonComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Notice = (props: {
   title: string;
@@ -76,39 +76,6 @@ const SignInInstructions = () => {
   );
 };
 
-const AutofillableDemoInput = (props: {
-  inputAttributes: InputHTMLAttributes<HTMLInputElement>;
-  label: string;
-}) => {
-  const [autofillableInputValue, setAutoFillableInputValue] =
-    useState<string>();
-
-  return (
-    <div className="space-y-2">
-      <label
-        htmlFor={props.inputAttributes.id}
-        className="block font-semibold text-gray-600"
-      >
-        {props.label}{' '}
-        {autofillableInputValue?.endsWith('@icloud.com') && (
-          <FontAwesomeIcon
-            icon={faCheckCircle}
-            className="ml-1 mt-1 text-green-500"
-          />
-        )}
-      </label>
-      <input
-        className="bg-[Canvas] block w-full rounded-md relative px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-hidden focus:ring-sky-400 focus:border-sky-400 focus:z-10 sm:text-sm"
-        defaultValue={autofillableInputValue}
-        onInput={(e) =>
-          setAutoFillableInputValue((e.target as HTMLInputElement).value)
-        }
-        {...props.inputAttributes}
-      />
-    </div>
-  );
-};
-
 const UsageInstructions = () => {
   return (
     <div className="space-y-4">
@@ -118,30 +85,10 @@ const UsageInstructions = () => {
           MacOS-System-Settings-like UI that enables you to generate new
           HideMyEmail addresses and manage existing ones.
         </p>
-        <p>
-          Generate or select an address in the extension pop-up, then use its
-          Autofill button to fill email fields on the current page.
-        </p>
-      </div>
-      <div className="space-y-2">
-        <p>Try it yourself:</p>
-        <div className="w-full max-w-md p-3 border rounded-lg bg-gray-50">
-          <form className="space-y-2">
-            <AutofillableDemoInput
-              label="Autofill from the extension pop-up"
-              inputAttributes={{
-                id: 'autofill-from-popup',
-                name: 'email',
-                type: 'email',
-                placeholder: 'Use Autofill in the extension pop-up',
-              }}
-            />
-          </form>
-        </div>
       </div>
       <div>
-        Don&apos;t forget to delete the HideMyEmail addresses you created above
-        for the purposes of trying this out:
+        Don&apos;t forget to delete any HideMyEmail addresses you created for
+        testing:
         <ol className="list-decimal list-inside">
           <li>Open the extension pop-up (🍏 icon)</li>
           <li>Navigate to the &quot;Manage emails&quot; view</li>

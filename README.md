@@ -24,10 +24,7 @@ _Disclaimer: This extension is not endorsed by, directly affiliated with, mainta
 
 - Simple pop-up UI for generating and reserving new Hide My Email addresses
 - Ability to manage existing Hide My Email addresses (including deactivation, reactivation, and deletion)
-- Autofilling on any HTML input element that is relevant to email
 - Quick configuration of Hide My Email settings, such as the Forward-To address, through the Options page of the extension
-
-After generating and reserving an address, use the pop-up's Autofill button to fill email fields on the current page.
 
 ## Develop
 
